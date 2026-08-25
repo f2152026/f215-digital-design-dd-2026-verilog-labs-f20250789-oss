@@ -30,8 +30,40 @@ module cla4(
   wire p0, p1, p2, p3;
   wire g0, g1, g2, g3;
   wire c1, c2, c3;
+  wire andc1, andc2a, andc2b, andc3a, andc3b, andc3c, andc4a, andc4b, andc4c, andc4d;
 
   // TODO: your gate-level P/G, carry, and sum logic goes here.
   // (cout should be connected to c4.) Remember the delay on every gate.
+  xor #(2) (p0, a[0], b[0]);
+  xor #(2) (p1, a[1], b[1]);
+  xor #(2) (p2, a[2], b[2]);
+  xor #(2) (p3, a[3], b[3]);
 
+  and #(2) (g0, a[0], b[0]);
+  and #(2) (g1, a[1], b[1]);
+  and #(2) (g2, a[2], b[2]);
+  and #(2) (g3, a[3], b[3]);
+
+  and #(2) (andc1, p0, cin);
+  or #(2) (c1, andc1, p0);
+
+  and #(2) (andc2a, p1, g0);
+  and #(2) (andc2b, p1, p0, cin);
+  or #(2) (c2, andc2a, andc2b, g1);
+
+  and #(2) (andc3a, p2, g1);
+  and #(2) (andc3b, p2, p1, g0);
+  and #(2) (andc3c, p2, p1, p0, cin);
+  or #(2) (c3, andc3a, andc3b, andc3c, g2);
+
+  and #(2) (andc4a, p3, g2);
+  and #(2) (andc4b, p3, p2, g1);
+  and #(2) (andc4c, p3, p2, p1, g0);
+  and #(2) (andc4d, p3, p2, p1, p0, cin);
+  or #(2) (cout, andc4a, andc4b, andc4c, andc4d, g3);
+
+  xor #(2) (sum[0], p0, cin);
+  xor #(2) (sum[1], p1, c1);
+  xor #(2) (sum[2], p2, c2);
+  xor #(2) (sum[3], p3, c3);
 endmodule

@@ -45,7 +45,7 @@ module cla4(
   and #(2) (g3, a[3], b[3]);
 
   and #(2) (andc1, p0, cin);
-  or #(2) (c1, andc1, p0);
+  or #(2) (c1, andc1, g0);
 
   and #(2) (andc2a, p1, g0);
   and #(2) (andc2b, p1, p0, cin);

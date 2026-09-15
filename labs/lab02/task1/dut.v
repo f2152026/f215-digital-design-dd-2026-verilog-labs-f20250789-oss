@@ -52,7 +52,12 @@ module DUT (
 
   // );
 
+  // ---- Option 2: behavioral version ----
+  mux_beh U1 (
+    .I0 (I0),
+    .I1 (I1),
+    .S  (S),
+    .Y  (Y)
+  );
 
-
-endmodule 
-
+endmodule

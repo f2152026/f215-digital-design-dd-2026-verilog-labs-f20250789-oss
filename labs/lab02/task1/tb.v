@@ -1,20 +1,21 @@
 // tb.v
-// Starter testbench template -- YOU complete this file.
-//
-// Goal: apply all 8 combinations of I0, I1, S (5 time units apart) to DUT
-// and observe the output. Fill in every TODO below.
+// Complete testbench for multiplexer DUT
 
 module tb;
 
-  // TODO: declare the three DUT inputs as the appropriate variable type.
-  // Use exactly these names: t_i0, t_i1, t_s (needed by $monitor below).
-  reg   ________________________;
-  // TODO: declare the DUT output as the appropriate net type.
-  // Use exactly this name: t_y (needed by $monitor below).
-  wire  ________________________;
+  // Testbench inputs driving DUT ports must be variables (reg)
+  reg  t_i0, t_i1, t_s;
+  
+  // Testbench outputs connected to DUT ports must be nets (wire)
+  wire t_y;
 
-  // TODO: instantiate DUT here, connecting t_i0, t_i1, t_s, t_y to its ports
-
+  // Instantiate DUT
+  DUT DUT (
+    .I0 (t_i0),
+    .I1 (t_i1),
+    .S  (t_s),
+    .Y  (t_y)
+  );
 
   // Waveform dump configuration
   string vcd_file;
@@ -25,10 +26,17 @@ module tb;
     end
   end
 
+  // Stimulus generation: 8 input combinations spaced 5 time units apart
   initial begin
-    // TODO: apply all 8 combinations of t_i0, t_i1, t_s, 5 time units apart,
-    // then $finish. (Same pattern you used in Lab 1's tb.v.)
-
+    t_i0 = 0; t_i1 = 0; t_s = 0; #5;
+    t_i0 = 0; t_i1 = 0; t_s = 1; #5;
+    t_i0 = 1; t_i1 = 0; t_s = 0; #5;
+    t_i0 = 1; t_i1 = 0; t_s = 1; #5;
+    t_i0 = 0; t_i1 = 1; t_s = 0; #5;
+    t_i0 = 0; t_i1 = 1; t_s = 1; #5;
+    t_i0 = 1; t_i1 = 1; t_s = 0; #5;
+    t_i0 = 1; t_i1 = 1; t_s = 1; #5;
+    $finish;
   end
 
   initial

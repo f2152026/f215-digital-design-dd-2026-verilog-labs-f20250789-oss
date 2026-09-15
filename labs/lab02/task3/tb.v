@@ -37,6 +37,7 @@ module tb;
       end
     end
     $finish;
+    
   end
 
   initial begin

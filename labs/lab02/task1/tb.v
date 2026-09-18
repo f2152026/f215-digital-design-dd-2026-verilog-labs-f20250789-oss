@@ -1,0 +1,45 @@
+// tb.v
+// Complete testbench for multiplexer DUT
+
+module tb;
+
+  // Testbench inputs driving DUT ports must be variables (reg)
+  reg  t_i0, t_i1, t_s;
+  
+  // Testbench outputs connected to DUT ports must be nets (wire)
+  wire t_y;
+
+  // Instantiate DUT
+  DUT DUT (
+    .I0 (t_i0),
+    .I1 (t_i1),
+    .S  (t_s),
+    .Y  (t_y)
+  );
+
+  // Waveform dump configuration
+  string vcd_file;
+  initial begin
+    if ($value$plusargs("vcd=%s", vcd_file)) begin
+      $dumpfile(vcd_file);
+      $dumpvars(0, DUT);
+    end
+  end
+
+  // Stimulus generation: 8 input combinations spaced 5 time units apart
+  initial begin
+    #5; t_i0 = 0; t_i1 = 0; t_s = 0; 
+    #5; t_i0 = 0; t_i1 = 0; t_s = 1; 
+    #5; t_i0 = 1; t_i1 = 0; t_s = 0; 
+    #5; t_i0 = 1; t_i1 = 0; t_s = 1; 
+    #5; t_i0 = 0; t_i1 = 1; t_s = 0; 
+    #5; t_i0 = 0; t_i1 = 1; t_s = 1; 
+    #5; t_i0 = 1; t_i1 = 1; t_s = 0; 
+    #5; t_i0 = 1; t_i1 = 1; t_s = 1; 
+    $finish;
+  end
+
+  initial
+    $monitor($time, " I0=%b I1=%b S=%b | Y=%b", t_i0, t_i1, t_s, t_y);
+
+endmodule

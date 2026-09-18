@@ -28,14 +28,14 @@ module tb;
 
   // Stimulus generation: 8 input combinations spaced 5 time units apart
   initial begin
-    t_i0 = 0; t_i1 = 0; t_s = 0; #5;
-    t_i0 = 0; t_i1 = 0; t_s = 1; #5;
-    t_i0 = 1; t_i1 = 0; t_s = 0; #5;
-    t_i0 = 1; t_i1 = 0; t_s = 1; #5;
-    t_i0 = 0; t_i1 = 1; t_s = 0; #5;
-    t_i0 = 0; t_i1 = 1; t_s = 1; #5;
-    t_i0 = 1; t_i1 = 1; t_s = 0; #5;
-    t_i0 = 1; t_i1 = 1; t_s = 1; #5;
+    #5; t_i0 = 0; t_i1 = 0; t_s = 0; 
+    #5; t_i0 = 0; t_i1 = 0; t_s = 1; 
+    #5; t_i0 = 1; t_i1 = 0; t_s = 0; 
+    #5; t_i0 = 1; t_i1 = 0; t_s = 1; 
+    #5; t_i0 = 0; t_i1 = 1; t_s = 0; 
+    #5; t_i0 = 0; t_i1 = 1; t_s = 1; 
+    #5; t_i0 = 1; t_i1 = 1; t_s = 0; 
+    #5; t_i0 = 1; t_i1 = 1; t_s = 1; 
     $finish;
   end
 
